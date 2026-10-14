@@ -70,6 +70,13 @@ animation above is the silent version and the file is the one with audio. The br
 right half is committed beside it:
 [`off-vs-on.compiled-brief.txt`](https://github.com/ruashots/open-h3-ir/blob/main/docs/media/off-vs-on.compiled-brief.txt).
 
+## Motion Director integration (experimental fork)
+
+Compile individual clip briefs with a shared continuity description using the
+new [clip batch API](docs/clip-batches.md). The accompanying Motion Director fork
+consumes each prompt and its exact frame count directly. No H3 weights load
+during prompt writing. This is an experimental integration, not an upstream release.
+
 ## Quick start
 
 ```bash
