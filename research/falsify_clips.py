@@ -9,7 +9,7 @@ import sys
 root = Path(__file__).resolve().parents[1]
 source = root / "h3ir/clips.py"
 original = source.read_bytes()
-text = original.decode("utf-8")
+text = original.decode("utf-8").replace("\r\n", "\n")
 cases = [
     ("frame drift", '"frames": target.frames,', '"frames": target.frames + 17,',
      "tests/test_clips.py::test_real_compiler_preserves_clip_boundaries_dialogue_and_grid", 1),
@@ -23,7 +23,7 @@ try:
             raise RuntimeError(f"BROKEN {name}: mutation anchor moved")
         mutated = text.replace(before, after)
         compile(mutated, str(source), "exec")
-        source.write_text(mutated, encoding="utf-8")
+        source.write_text(mutated, encoding="utf-8", newline="\n")
         if source.read_text(encoding="utf-8") != mutated:
             raise RuntimeError(f"BROKEN {name}: mutation did not land")
         run = subprocess.run([sys.executable, "-B", "-m", "pytest", test, "-q"],
